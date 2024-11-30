@@ -77,4 +77,21 @@ class UserController extends Controller
         // On redirige l'utilisateur vers la liste des articles (avec un flash)
         return redirect()->route('dashboard')->with('success', 'Article updated !');
     }
+
+    public function remove ($id)
+    {
+        //Recherche de l'article par son id
+        $article = Article::find($id);
+
+        // On vérifie que l'utilisateur est bien le créateur de l'article
+        if ($article->user_id !== Auth::user()->id) {
+            return redirect()->route('dashboard')->with('error', 'You are not allowed to remove this article !');
+        }
+
+        //Remove article
+        $article->delete();
+
+        //Redirige avec message de succès
+        return redirect()->route('dashboard')->with('success', 'Article removed !');
+    }
 }

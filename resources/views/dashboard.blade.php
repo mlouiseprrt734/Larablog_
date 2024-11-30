@@ -45,6 +45,9 @@
                                         <div class="text-right">
                                             <a href="{{ route('articles.edit', $article->id) }}" class="text-purple-600 hover:text-purple-700">Modify</a>
                                         </div>
+                                        <div class="text-right">
+                                            <a href="{{ route('articles.remove', $article->id) }}" class="text-red-600 hover:text-red-700">Delete</a>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
