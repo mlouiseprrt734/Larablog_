@@ -23,9 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/articles/{article}/update', [UserController::class, 'update'])->name('articles.update');
     Route::get('/articles/{article}/remove', [UserController::class, 'remove'])->name('articles.remove');
 
-    //article view for everyone
-    Route::get('/{user}', [PublicController::class, 'index'])->name('public.index');
-    Route::get('/{user}/{article}', [PublicController::class, 'show'])->name('public.show');
+
 
     //gestion commentaires
     Route::post('/comments/store', [CommentController::class, 'store'])->name('comments.store');
@@ -33,4 +31,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
+
 require __DIR__.'/auth.php';
+
+    //article view for everyone
+    Route::get('/{user}', [PublicController::class, 'index'])->name('public.index');
+    Route::get('/{user}/{article}', [PublicController::class, 'show'])->name('public.show');
