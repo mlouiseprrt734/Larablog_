@@ -5,7 +5,10 @@
         <!-- Détail de l'article -->
         <div class="block p-6 bg-white border border-gray-200 rounded-lg shadow max-w-4xl mx-auto dark:bg-gray-800 dark:border-gray-700">
             <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $article->title }}</h2>
-            <h5 class="mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            @foreach($article->categories as $category)
+                    <span class="bg-pink-100 text-pink-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-pink-900 dark:text-pink-300">{{$category->name}}</span>
+            @endforeach
+            <h5 class="mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
                 Published on {{ $article->created_at->format('Y/m/d') }} by 
                 <a href="{{ route('public.index', $article->user->id) }}" class="text-blue-500 hover:underline">{{ $article->user->name }}</a>
             </h5>
