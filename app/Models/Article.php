@@ -34,14 +34,16 @@ class Article extends Model
 
 	protected $casts = [
 		'user_id' => 'int',
-		'draft' => 'bool'
+		'draft' => 'bool',
+		'nbLikes' => 'int',
 	];
 
 	protected $fillable = [
 		'user_id',
 		'title',
 		'content',
-		'draft'
+		'draft',
+		'nbLikes',
 	];
 
 	public function user()

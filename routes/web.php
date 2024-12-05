@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {return view('welcome');});
@@ -23,10 +24,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/articles/{article}/update', [UserController::class, 'update'])->name('articles.update');
     Route::get('/articles/{article}/remove', [UserController::class, 'remove'])->name('articles.remove');
 
-
-
     //gestion commentaires
     Route::post('/comments/store', [CommentController::class, 'store'])->name('comments.store');
+
+    //gestion likes
+    Route::get('/like/{article}', [LikesController::class, 'like'])->name('article.like');
 
 });
 
