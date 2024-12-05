@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,8 @@ class UserController extends Controller
 {
     public function create()
     {
-        return view('articles.create');
+        $categories = Category::all();
+        return view('articles.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -52,11 +54,20 @@ class UserController extends Controller
             return redirect()->route('dashboard')->with('error', 'You are not allowed to modify this article !');
         }
 
+        $categories = Category::all();
+
+        $selectedArticlescat = array_map(fn($item) => $item->id, $article->categories()->get()->all());
+        
+        //tous les articles d'une catégorie
+        //$selectedArticlescat = Article::whereHas("categories", fn($q) => $q->whereIn("id", $categories));
+
         // On retourne la vue avec l'article
         return view('articles.edit', [
-            'article' => $article
-        ]);
+            'article' => $article, 'categories' => $categories, 'selectedArticlescat' => $selectedArticlescat]);
     }
+
+
+    //user.has(article) or category.has(article)
 
     public function update(Request $request, Article $article)
     {
@@ -70,6 +81,9 @@ class UserController extends Controller
 
         // Gestion du draft
         $data['draft'] = isset($data['draft']) ? 1 : 0;
+
+        //Update des categories
+        $article->categories()->sync($request->input('categories'));
 
         // On met à jour l'article
         $article->update($data);

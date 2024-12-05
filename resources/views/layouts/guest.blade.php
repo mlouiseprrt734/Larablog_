@@ -14,15 +14,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+    <body class="font-sans text-gray-900">
+        <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
             @auth
                 @include('layouts.navigation')
             @endauth
 
             @guest
-                @if (Route::has('login'))
-                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                @if (Route::has('login')) 
+                    <div class="top-0 right-0 px-6 py-4">
                         <a href="{{ route('login') }}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500">Login</a>
                     </div>
                 @endif
