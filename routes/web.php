@@ -7,7 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ProfileController;
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', [PublicController::class, 'home'])->name('home');
 
 Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 
@@ -37,5 +37,8 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
     //article view for everyone
-    Route::get('/{user}', [PublicController::class, 'index'])->name('public.index');
+    Route::get('/public', [PublicController::class, 'all'])->name('public.all');
+    Route::post('/public/{article}', [PublicController::class, 'all'])->name('public.details');
+
+    Route::post('/articles', [PublicController::class, 'index'])->name('public.index');
     Route::get('/{user}/{article}', [PublicController::class, 'show'])->name('public.show');

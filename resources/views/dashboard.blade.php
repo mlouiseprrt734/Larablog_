@@ -5,10 +5,14 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">    
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="max-w-2xl text-center mx-auto mt-10 mb-10 lg:mb-14">
+                    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Create or edit your articles</h2>
+                    <p class="mt-1 text-gray-600 dark:text-neutral-400">Inspire people with your articles</p>
+                </div>
+                @if ($articles->isEmpty())
+                    <p class="text-center text-gray-500 dark:text-neutral-400">No articles available. Start by creating some!</p>
+                @endif
+
                         <!-- Message flash Success-->
                         @if (session('success'))
                         <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
@@ -35,9 +39,7 @@
                         </div>
                         @endif
 
-                        <div>
-                        <!-- Articles -->
-                            @foreach ($articles as $article)
+                        @foreach ($articles as $article)
                                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
                                     <div class="p-6 text-gray-900">
                                         <h2 class="text-2xl font-bold">{{ $article->title }}</h2>
@@ -50,11 +52,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</body>
 </x-app-layout>
