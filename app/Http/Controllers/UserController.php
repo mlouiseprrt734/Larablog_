@@ -38,16 +38,6 @@ class UserController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function index()
-    {
-        // On récupère l'utilisateur connecté.
-        $user = Auth::user();
-        $articles = Article::where('user_id', $user->id)->get();
-
-        // On retourne la vue.
-        return view('dashboard', ['articles' => $articles]);
-    }
-
     public function edit(Article $article)
     {
         // On vérifie que l'utilisateur est bien le créateur de l'article
@@ -108,5 +98,16 @@ class UserController extends Controller
 
         //Redirige avec message de succès
         return redirect()->route('dashboard')->with('success', 'Article removed !');
+    }
+
+
+    public function index()
+    {
+        // On récupère l'utilisateur connecté.
+        $user = Auth::user();
+        $articles = Article::where('user_id', $user->id)->get();
+
+        // On retourne la vue.
+        return view('dashboard', ['articles' => $articles]);
     }
 }

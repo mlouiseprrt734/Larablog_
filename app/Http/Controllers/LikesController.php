@@ -11,9 +11,9 @@ class LikesController extends Controller
     public function like (int $articleId)
     {
         $article = Article::find($articleId);
-        $article->nbLikes += 1;
+        $article->nbLikes ++ ;
         $article->save();
 
-        return redirect()->back();
+        return back();
     }
 }

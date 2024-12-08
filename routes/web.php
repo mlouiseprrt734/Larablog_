@@ -10,6 +10,9 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', [PublicController::class, 'home'])->name('home');
 
 Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+Route::get('/about', function () {return view('about');})->name('about');
+Route::get('/privacyPolicy', function () {return view('privacyPolicy');})->name('privacyPolicy');
+
 
 Route::middleware('auth')->group(function () {
     //gestion profiles
@@ -33,15 +36,16 @@ Route::middleware('auth')->group(function () {
     //affichage de tout les articles
     Route::get('/blog', [PublicController::class, 'every_article'])->name('every_article');
 
-});
+    Route::post('/public/{article}', [PublicController::class, 'all'])->name('public.details');
 
+    Route::post('/articles', [PublicController::class, 'index'])->name('public.index');
+    Route::get('/{user}/{article}', [PublicController::class, 'show'])->name('public.show');
+
+});
 
 
 require __DIR__.'/auth.php';
 
     //article view for everyone
     Route::get('/public', [PublicController::class, 'all'])->name('public.all');
-    Route::post('/public/{article}', [PublicController::class, 'all'])->name('public.details');
 
-    Route::post('/articles', [PublicController::class, 'index'])->name('public.index');
-    Route::get('/{user}/{article}', [PublicController::class, 'show'])->name('public.show');
