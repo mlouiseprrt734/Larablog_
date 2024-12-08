@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
     //gestion likes
     Route::get('/like/{article}', [LikesController::class, 'like'])->name('article.like');
 
+    //affichage de tout les articles
+    Route::get('/blog', [PublicController::class, 'every_article'])->name('every_article');
+
 });
 
 

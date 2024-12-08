@@ -43,4 +43,9 @@ class PublicController extends Controller
         $users = User::all();
         return view('public.all', ['users' => $users, 'articles' => Article::paginate(4)]);
     }
+
+    public function every_article(){
+        $users = User::all();
+        return view('articles.every_article', ['users' => $users, 'articles' => Article::paginate(4)]);
+    }
 }
